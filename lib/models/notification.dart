@@ -6,8 +6,12 @@ class Notif {
   String? expediteur;
   String? notification;
   String? date;
+  late DocumentReference reference;
+  String documentId = "";
 
   Notif(DocumentSnapshot snapshot) {
+    reference = snapshot.reference;
+    documentId = snapshot.id;
     Map<String, dynamic> map = snapshot.data()!;
     uid = map[keyUid];
     expediteur = map[keyExpediteur];

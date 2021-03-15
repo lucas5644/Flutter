@@ -114,11 +114,15 @@ class FirestoreHelper {
         keyDateNotif: DateTime.now().millisecondsSinceEpoch.toString(),
         keyExpediteur: currentUser.uid,
       };
-      firestoreUser.doc(author.uid).collection("notifications").doc().set(map);
+      firestoreUser.doc(author.uid).collection("notifications").doc("").set(map);
       selectedPost.reference.update({
         keyLikes: FieldValue.arrayUnion([currentUser.uid])
       });
     }
+  }
+
+  deleteNotification(String notifId) {
+    firestoreUser.doc(authInstance.currentUser!.uid).collection("notifications").doc(notifId).delete();
   }
 
   Stream<List<MyUser>> get abonnements {
